@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter your number to check if it is prime or not: ";
+    cin >> n;
+
+    if (n <= 1) {
+        // Handle edge cases for numbers less than or equal to 1
+        cout << "Your number is not prime." << endl;
+        return 0;
+    }
+
+    bool haiprime = true;
+
+    for (int i = 2; i < n; i++) { 
+        if (n % i == 0) {
+            haiprime = false;
+            break; // Break here only when a divisor is found
+        }
+    }
+
+    if (haiprime) {
+        cout << "Your number is prime." << endl;
+    } else {
+        cout << "Your number is not prime." << endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter the currncy note you want to have for 1330 ";
+    cin >> n;
+
+    
+    
+    
+    
+
+    switch (n) {
+        case 100:
+            cout << "The number of 100 rupee notes: " << n / 100 << endl;
+            break;
+
+        case 50:
+            cout << "The number of 50 rupee notes: " << n / 50 << endl;
+            break;
+
+        case 20:
+            cout << "The number of 20 rupee notes: " << n / 20 << endl;
+            break;
+
+        case 10:
+            cout << "The number of 10 rupee notes: " << n / 10 << endl;
+            break;
+
+        default:
+            cout << "Invalid option! Please choose 100, 50, 20, and 10" << endl;
+            break;
+    }
+    
+
+    return 0;
+}

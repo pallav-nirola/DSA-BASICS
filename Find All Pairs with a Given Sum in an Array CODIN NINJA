@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+void findPairs(int arr[], int n, int target) {
+    // Loop through each element of the array
+    for (int i = 0; i < n; i++) {
+        // Compare the current element with all the elements after it
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] + arr[j] == target) {
+                // Print the pair if their sum is equal to the target
+                cout << "The Pair is(" << arr[i] << ", " << arr[j] << ")" << endl;
+            }
+        }
+    }
+    cout<<"No pair of sum can be calculated for you input";
+}
+
+int main() {
+    int n, target;
+
+    // Input the size of the array
+    cout << "Enter the size of the array: ";
+    cin >> n;
+
+    int arr[n]; // Declare the array of size n
+
+    // Input the elements of the array
+    cout << "Enter the elements of the array: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Input the target sum
+    cout << "Enter the target sum: ";
+    cin >> target;
+
+    // Call the function to find pairs
+    cout << "Pairs with sum " << target << " are:" << endl;
+    findPairs(arr, n, target);
+
+    return 0;
+}

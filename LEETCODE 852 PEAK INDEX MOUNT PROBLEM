@@ -41,3 +41,46 @@ int main() {
 
     return 0;
 }
+// we chose binary search option for that making it possible using linear search
+#include<iostream>
+using namespace std;
+
+void findPeak(int arr[], int size) {
+    for (int i = 1; i < size - 1; i++) {
+        if (arr[i] >= arr[i - 1] && arr[i] >= arr[i + 1]) {
+            cout << "Peak element is " << arr[i] << endl;
+            return;  // We found the peak element, so we return.
+        }
+    }
+
+    // Special case for the first element
+    if (arr[0] >= arr[1]) {
+        cout << "Peak element is " << arr[0] << endl;
+        return;
+    }
+
+    // Special case for the last element
+    if (arr[size - 1] >= arr[size - 2]) {
+        cout << "Peak element is " << arr[size - 1] << endl;
+        return;
+    }
+
+    cout << "No peak found!" << endl;
+}
+
+int main() {
+    int size;
+    cout << "Enter the size of your array: ";
+    cin >> size;
+
+    int arr[size];
+    cout << "Enter your numbers: ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i];
+    }
+
+    findPeak(arr, size);
+    
+    return 0;
+}
+

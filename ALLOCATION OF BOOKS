@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+// Helper function to check if it is possible to allocate books
+// such that no student gets more than 'maxPages' pages
+bool isFeasible(int arr[], int n, int k, int maxPages) {
+    int studentCount = 1;  // Start with the first student
+    int page = 0;          // To keep track of current student's allocated pages
+
+    for (int i = 0; i < n; i++) {
+        if (page + arr[i] > maxPages) {
+            // If adding this book exceeds maxPages, allocate to the next student
+            studentCount++;
+            page = arr[i];  // Assign the current book to the next student
+
+            // If we need more than k students, return false
+            if (studentCount > k) {
+                return false;
+            }
+        } else {
+            // Otherwise, add the current book to the current student
+            page += arr[i];
+        }
+    }
+    return true;
+}
+
+// Function to find the minimum maximum number of pages allocated to a student
+int findMinPages(int arr[], int n, int k) {
+    int low = 0;
+    int high = 0;
+
+    // Initialize high as the total sum of pages
+    for (int i = 0; i < n; i++) {
+        high += arr[i];
+    }
+
+    // Initialize low as the maximum pages of a single book (cannot be less than this)
+    int maxBook = arr[0]; // Let's start by assuming the first book is the maximum
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > maxBook) {
+            maxBook = arr[i];  // Find the max book pages
+        }
+    }
+    low = maxBook;
+
+    int result = -1;
+
+    // Binary search on the maximum number of pages
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        // Check if it is possible to allocate books such that no student has more than 'mid' pages
+        if (isFeasible(arr, n, k, mid)) {
+            result = mid;  // If feasible, store the result
+            high = mid - 1; // Try for a smaller maximum value
+        } else {
+            low = mid + 1; // Otherwise, increase the minimum limit
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    int n, k;
+    cout << "Enter the number of books: ";
+    cin >> n;
+    int arr[n];
+    cout << "Enter the pages of each book: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    cout << "Enter the number of students: ";
+    cin >> k;
+
+    int result = findMinPages(arr, n, k);
+    if (result != -1) {
+        cout << "The minimum maximum pages allocated to a student is " << result << endl;
+    } else {
+        cout << "It is not possible to allocate books to " << k << " students." << endl;
+    }
+
+    return 0;
+}

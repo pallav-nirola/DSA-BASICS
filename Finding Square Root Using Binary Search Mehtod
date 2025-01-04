@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+// Helper function to find the integer square root using binary search
+int findSquareRoot(int number, int target) {
+    int start = 0, end = number;
+    int ans = 0;
+
+    while (start <= end) {
+        int mid = start + (end - start) / 2;
+
+        // Check if mid*mid is equal to the target
+        if (mid * mid == target) {
+            return mid;
+        }
+        // If mid*mid is less than the target, move the start up
+        else if (mid * mid < target) {
+            ans = mid;  // Store the closest integer result
+            start = mid + 1;
+        }
+        // If mid*mid is greater than the target, move the end down
+        else {
+            end = mid - 1;
+        }
+    }
+
+    return ans;  // Return the closest integer square root
+}
+
+int main() {
+    int number;
+    cout << "Enter a non-negative integer to find its square root: ";
+    cin >> number;
+
+    int result = findSquareRoot(number, number);
+    cout << "The integer square root of " << number << " is " << result << endl;
+
+    return 0;
+}

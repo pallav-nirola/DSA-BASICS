@@ -37,3 +37,55 @@ int main() {
 
     return 0;
 }
+
+
+// for float varibale we will introduce precision; if start-end <   precision return mid
+er, including floating-point numbers using binary search:
+
+C++ Program: Finding Square Root of Floats Using Binary Search
+cpp
+Copy code
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Function to find square root of a number (both integers and floats)
+float findSquareRoot(float number) {
+    if (number < 0) {
+        cout << "Square root of negative numbers is not defined for real numbers." << endl;
+        return -1;
+    }
+
+    // Start and end for binary search
+    float start = 0, end = number;
+    float mid;
+    float precision = 0.00001; // Define precision for floating-point numbers
+
+    // Perform binary search for square root
+    while ((end - start) > precision) {
+        mid = start + (end - start) / 2;
+        
+        if (mid * mid == number) {
+            return mid; // Exact square root found
+        }
+        else if (mid * mid < number) {
+            start = mid; // Move start up
+        }
+        else {
+            end = mid; // Move end down
+        }
+    }
+
+    return mid; // Return the result when the precision is met
+}
+
+int main() {
+    float number;
+    cout << "Enter a number to find its square root: ";
+    cin >> number;
+
+    float result = findSquareRoot(number);
+    cout << "The square root of " << number << " is approximately " << result << endl;
+
+    return 0;
+}

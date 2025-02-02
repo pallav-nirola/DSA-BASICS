@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+#include <algorithm>
+int main()
+{
+int array[9] = {67, 1, 79, 19, 5, 102, 75, 26, 54};
+int array_array[10] = {45, 12, 78, 34, 89, 23, 56, 91, 10, 67};
+int merged[19];
+for (int i = 0; i < 9; i++)
+{
+    merged[i] = array[i];
+}
+for (int o = 0; o < 10; o++)
+{
+    merged[o+9] = array_array[o];
+}
+sort(merged, merged + 19);
+
+for (int i = 0; i < 19; i++)
+{
+   cout<<merged[i]<<" ";
+}
+
+    return 0;
+}

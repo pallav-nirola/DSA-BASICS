@@ -25,3 +25,14 @@ int main (){
     
     return 0;
 }
+//using stl 
+void reverseArray(vector<int> &arr, int m) {
+    int s = m + 1, e = arr.size() - 1; // Start after m, end at the last index
+
+    while (s <= e) {
+        swap(arr[s], arr[e]); // Swap elements at positions s and e
+        s++; // Move start pointer forward
+        e--; // Move end pointer backward
+    }
+}
+

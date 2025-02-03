@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    char str[100];
+    cout << "Enter the string" << endl;
+    cin >> str;
+    bool found = true; // Initialize found as true (assuming palindrome unless proven otherwise)
+    int sum = 0;
+    cout << "The string is " << str << endl;
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        sum++;
+    }
+    cout << "The length of the string is " << sum << endl;
+    char rts[100];
+    for (int i = 0; i < sum; i++)
+    {
+        rts[sum - 1 - i] = str[i];
+    }
+    rts[sum] = '\0'; // this was my mistake that is why i was getting an garbage value after revesing my str so set the last element to null to not get the garbage value
+    cout << "reversed string is  " << rts;
+
+    for (int i = 0; i < sum; i++)
+    {
+        if (str[i] != rts[i])
+        {
+            found = false;
+            break;
+        }
+    }
+    cout << endl;
+    if (found)
+    {
+        cout << "the string is palindrome" << endl;
+    }
+    else
+    {
+        cout << "The string is not palindrome" << endl;
+    }
+
+    return 0;
+}
+// using without copying the array
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    char str[100];
+    cout << "Enter the string: " << endl;
+    cin >> str;
+
+    bool found = true;  // Initialize found as true (assuming palindrome unless proven otherwise)
+    int sum = 0;
+
+    // Calculate the length of the string
+    cout << "The string is: " << str << endl;
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        sum++;
+    }
+    cout << "The length of the string is: " << sum << endl;
+
+    // Check for palindrome without copying the array (in-place reversal)
+    for (int i = 0; i < sum / 2; i++)
+    {
+        if (str[i] != str[sum - 1 - i])
+        {
+            found = false;
+            break;
+        }
+    }
+
+    // Output the result
+    if (found)
+    {
+        cout << "The string is palindrome" << endl;
+    }
+    else
+    {
+        cout << "The string is not palindrome" << endl;
+    }
+
+    return 0;
+}

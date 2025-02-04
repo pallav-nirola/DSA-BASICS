@@ -1,0 +1,73 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        // If s1 is longer than s2, return false immediately
+        if (s1.length() > s2.length()) {
+            return false;
+        }
+
+        // Sort the string s1
+        string sorted_s1 = s1;
+        sort(sorted_s1.begin(), sorted_s1.end());
+
+        // Check each window of size s1.length() in s2
+        for (int i = 0; i <= s2.length() - s1.length(); i++) {
+            // Extract the current window of s2
+            string window = s2.substr(i, s1.length());
+            
+            // Sort the window
+            sort(window.begin(), window.end());
+
+            // Compare the sorted window with sorted_s1
+            if (window == sorted_s1) {
+                return true;
+            }
+        }
+
+        // If no match is found
+        return false;
+    }
+};
+// THIS ABOVE IS THE OST OPTIMISED SOLUTION WITH SPACE GAINNG 10.1 MB USE THIS VECTOR APPROACH TO SOLVE
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    string s1, s2;
+
+    // Input strings s1 and s2
+    cin >> s1 >> s2;
+
+    // If s1 is longer than s2, return false immediately
+    if (s1.length() > s2.length()) {
+        cout << "false" << endl;
+        return 0;
+    }
+
+    // Sort the string s1
+    string sorted_s1 = s1;
+    sort(sorted_s1.begin(), sorted_s1.end());
+
+    // Check each window of size s1.length() in s2
+    for (int i = 0; i <= s2.length() - s1.length(); i++) {
+        // Extract the current window of s2
+        string window = s2.substr(i, s1.length());
+        
+        // Sort the window
+        sort(window.begin(), window.end());
+
+        // Compare the sorted window with sorted_s1
+        if (window == sorted_s1) {
+            cout << "true" << endl;
+            return 0;
+        }
+    }
+
+    // If no match is found
+    cout << "false" << endl;
+    return 0;
+}
+// this above is I how will apprach

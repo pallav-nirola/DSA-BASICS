@@ -1,0 +1,26 @@
+//The brut force solution for the claculation for HCF is  itn hcf=1;
+//for(int i = 1; i<+min(a,b) ; i ++){
+//if{a%i==0 && b%i==0){gcd=i}}
+//Euclid's Algorithim
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+
+  int a;
+  cout << "Enter the value of  n " << endl;
+  cin >> a;
+  int b;
+  cout << "Enter the value of  n " << endl;
+  cin >> b;
+  while (b > 0)
+  {
+    int remainder = a % b;
+    a = b;
+    b = remainder;
+  }
+  cout << "The HCF of the two numbers is " << a;
+
+  return 0;
+}

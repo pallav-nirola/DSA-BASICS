@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+bool isSorted(int array[], int size)
+{
+  if (array[0] > array[1])
+  {
+    return false;
+  }
+  return isSorted(array + 1, size - 1);
+}
+int main()
+{
+  int array[10] = {1, 2, 3, 4, 5, 86, 77, 88, 95, 10};
+  if (isSorted(array, 10))
+  {
+    cout << "The array is sorted" << endl;
+  }
+  else
+  {
+    cout << "The array is not sorted" << endl;
+  }
+  {
+    /* code */
+  }
+
+  return 0;
+}

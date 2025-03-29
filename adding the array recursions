@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int add(int *array, int size) {
+    if (size == 0)  // Base case: if size is zero, return 0
+        return 0;
+    return array[0] + add(array + 1, size - 1); 
+}
+
+int main() {
+    int array[5] = {2, 5, 8, 12, 15};
+    cout << add(array, 5) << endl;  // Output should be 42
+    return 0;
+}

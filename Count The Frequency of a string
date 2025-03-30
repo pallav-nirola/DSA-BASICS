@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string input;  // To store the input string
+    int freq[256] = {0};  // Array to store frequency of characters (using ASCII values)
+
+    // Ask the user to enter a string
+    cout << "Enter a string: ";
+    getline(cin, input);  // Read the entire line as input
+
+    // Traverse the string to calculate the frequency of each character
+    for (char c : input) {
+        // Convert each character to its ASCII value and use that value as the index in the freq array
+        freq[c]++;  // Increment the frequency of the character at position c in the freq array
+    }
+
+    // Display the frequencies of characters that appeared at least once
+    cout << "Character frequencies in the string:" << endl;
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] > 0) {  // Check if the character appears at least once
+            // Print the character and its frequency
+            cout << (char)i << ": " << freq[i] << endl;
+        }
+    }
+
+    return 0;  // End of the program
+}
+//We create an array freq[256] to count how many times each character appears.
+
+Since there are 256 possible ASCII characters, we use an array of size 256 to cover the entire ASCII range.
+
+The index of the array represents the ASCII value of a character, and the value at that index is the frequency of that character in the string.
+
+Counting Frequencies:
+
+The for loop goes through each character of the input string.
+
+For each character c, we use freq[c]++ to increment the frequency of that character. This works because the ASCII value of a character can be used as an index in the freq array.
+
+Displaying Frequencies:
+
+We loop through the freq array from index 0 to 255.
+
+If a character appears at least once (i.e., freq[i] > 0), we print that character and its frequency.
+
+We use (char)i to print the character corresponding to the ASCII value stored at index i.
+
+Edge Case:
+
+If no characters are repeated, each character will still be counted, but only those with a frequency greater than 0 will be printed.

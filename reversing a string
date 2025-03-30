@@ -21,3 +21,20 @@ int main()
   cout << "The  reversed string is: " << array << endl;
   return 0;
 }
+//more Optimised Solution for this would be 
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+int main()
+{
+
+  char array[10] ;
+  cout << "Enter the string: ";
+  cin>>array;
+  int lenght= strlen(array);// for storing lenght of the string in cstring include
+  cout<<"Length of the string is: "<<lenght<<endl;
+  reverse(array, array+lenght);//for reversing the string using algorithm header file
+  cout << "The  reversed string is: " << array << endl;
+  return 0;
+}

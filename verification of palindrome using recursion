@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+bool palin(string str, int start, int end)
+{
+    if (start >= end)
+    {
+        return true;
+    }
+
+    else if (str[start] != str[end])
+    {
+        return false;
+    }   
+    else
+    {
+        return palin(str, start + 1, end - 1);
+    }
+    return palin(str, start + 1, end - 1);
+}
+int main()
+{
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+    int length = str.length();
+    if (palin(str, 0, length - 1) == true)
+    {
+        cout << "The string is a palindrome" << endl;
+    }
+    else
+    {
+        cout << "The string is not a palindrome" << endl;
+    }
+    
+    
+    return 0;
+}

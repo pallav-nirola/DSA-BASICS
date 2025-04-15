@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+    string word = "";
+    string newstr = "";
+
+    for (int i = str.size() - 1; i >= 0; i--)
+    {
+        if (str[i] == ' ')
+        {
+            newstr = newstr + word + ' ';
+            word = "";
+        }
+        else
+        {
+            word = str[i] + word;
+        }
+    }
+
+    newstr = newstr + word;
+
+    cout << newstr;
+
+    return 0;
+}

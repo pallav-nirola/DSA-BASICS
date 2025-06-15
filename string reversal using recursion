@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+void reverse(string str, int start, int end)
+{
+    if (start > end)
+
+        return;
+    swap(str[start], str[end]);
+
+    reverse(str, start++, end--);
+}
+
+int main()
+{
+    string str = "PALLAV";
+    reverse(str, 0, str.length() - 1);
+    cout << str << endl;
+
+    return 0;
+}
+// here the output will be PALLAV and not VALLAP becasue the passing by varibale and a copy is created here to reverse the code pass the pointer that is the address or instead of void func use a return type that will return the reversed string ;
+#include <iostream>
+#include <string>
+using namespace std;
+
+void reverse(string &str, int start, int end) {
+    if (start >= end)
+        return;
+
+    swap(str[start], str[end]);
+    reverse(str, start + 1, end - 1);
+}
+
+int main() {
+    string str = "PALLAV";
+    reverse(str, 0, str.length() - 1);
+    cout << str << endl;
+    return 0;
+}
+// third approach
+#include <iostream>
+#include <string>
+using namespace std;
+
+string reverse(string str, int start, int end) {
+    if (start >= end)
+        return str;
+
+    swap(str[start], str[end]);
+    return reverse(str, start + 1, end - 1);
+}
+
+int main() {
+    string str = "PALLAV";
+    string reversedStr = reverse(str, 0, str.length() - 1);
+    cout << reversedStr << endl;
+    return 0;
+}

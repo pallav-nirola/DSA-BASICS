@@ -76,6 +76,7 @@ int main()
     Lists.insert(5);
     Lists.push_back(6);
     Lists.push_back(7);
+    Lists.pop_front();
     Lists.display();
 
     return 0;

@@ -51,6 +51,13 @@ public:
         }
 
         }
+        void pop_front(){
+            Node *filhaal = head;
+            head = (*head).next;
+            (*filhaal).next = NULL;
+            delete filhaal;
+
+        }
           void display(){
             Node *temp = head;
             while(temp != NULL){

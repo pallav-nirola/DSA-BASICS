@@ -1,0 +1,23 @@
+Node* DetectStartingPOint()
+    {
+        Node *slow = head;
+        Node *fast = head;
+        while (fast != NULL && (*fast).next != NULL)
+        {
+            slow = (*slow).next;
+            fast = (*(*fast).next).next;
+            if (slow == fast)
+            {
+                cout << "INFINITE LOOP";
+                 slow = head;
+            while (slow != fast)
+            {
+                /* code */ slow = (*slow).next;
+                fast = (*fast).next;
+            }
+            }
+           
+            cout<<(*fast).data<<endl;
+            return slow;
+        }
+    }

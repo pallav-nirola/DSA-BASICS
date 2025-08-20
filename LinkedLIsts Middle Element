@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+class Node
+{
+public:
+    int data;
+    Node *next;
+    
+
+    Node(int value)
+    {
+        data = value;
+        next = NULL;
+        
+    }
+};
+class LinkedLists
+{
+private:
+    Node *head;
+    Node *tail;
+
+public:
+    LinkedLists()
+    {
+        head = NULL;
+        tail = NULL;
+    }
+    void push_front(int val)
+    {
+        Node *newNode = new Node(val);
+        if (head == NULL)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            (*newNode).next = head;
+          
+            head = newNode;
+        }
+    }
+    void display()
+    {
+        Node *temp = head;
+
+        while (temp != NULL)
+        {
+            cout << (*temp).data << " ";
+            temp = (*temp).next;
+        }
+    }
+    void findMid(){
+        Node *slow = head ;
+        Node *fast = head;;
+        while (fast!= NULL && (*fast).next !=NULL)
+        {
+           slow = (*slow).next;
+           fast = (*(*fast).next).next;
+           
+        }
+        cout<< "Middle element is: " << (*slow).data << endl;
+        
+    } 
+    // MY approach to solve this was to take pointer head an tail and increase the head pointer and decrease the tail pointer and whenever they meet it becomes their mid element for od and for is if head->next = tail then return that value it becomes mid for even
+// second approach is to travel through whole loop and count the number of node and  then travel again through lists and then return the mid value mid by /2; 
+};
+int main()
+{
+   LinkedLists Lists;
+    Lists.push_front(2);
+    Lists.push_front(3);
+    Lists.push_front(4);
+    Lists.push_front(5);
+    Lists.push_front(6);
+    Lists.push_front(7);
+    Lists.push_front(8);
+    Lists.display();
+    cout<<endl;
+    Lists.findMid();
+
+    return 0;
+}

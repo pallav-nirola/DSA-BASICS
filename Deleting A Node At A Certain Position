@@ -54,7 +54,7 @@ public:
             temp = (*temp).next;
         }
         Node *toDelete = (*temp).next;
-        (*temp).next = (*toDelete).next;
+        (*temp).next = (*toDelete).next; WE ARE REDIRECTING IT 
         delete toDelete;
     }
 };

@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int array[6] = {2, 1, 5, 6, 2, 3};
+    int ans[6];
+    for (int i = 0; i < 5; i++)
+    {
+        if (array[i] > array[i + 1])
+        {
+            ans[i] = array[i];
+        }
+
+        else if (array[i] <= array[i + 1])
+        {
+            int width = 1;
+            int height = array[i];
+            int j = i-1;
+            while (j>=0 && height<=array[j])
+            {
+                width++;
+                j--;
+            }
+             j = i+1;
+            while (j<6 && height<=array[j])
+            {
+                width++;
+                j++;
+            }
+            int area = width * array[i];
+            ans[i] = area;
+        }
+    }
+ans[5 ] = array[5];
+for (int i = 0; i < 6; i++)
+{
+   cout<<ans[i]<<" ";
+}
+
+    return 0;
+}

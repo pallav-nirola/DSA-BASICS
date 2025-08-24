@@ -1,0 +1,26 @@
+// naive approach
+#include <iostream>
+using namespace std;
+int main()
+{
+    int prices[] = {100, 80, 60, 70, 60, 75, 85};
+    int n = sizeof(prices) / sizeof(prices[0]);
+    int span[n];
+    for (int i = 0; i < n; i++)
+    {
+
+        span[i] = 1;
+        int j = i - 1;
+        while (j >= 0 && prices[i] >= prices[j])
+        {
+            span[i]++;
+            j--;
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << span[i] << " ";
+    }
+
+    return 0;
+}

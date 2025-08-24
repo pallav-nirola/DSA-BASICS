@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <stack>
+using namespace std;
+class Stack
+{
+public:
+    stack<int> stk;
+
+    void push(int val)
+    {
+        stk.push(val);
+    }
+    void pop()
+    {
+        if (!stk.empty())
+        {
+            stk.pop();
+        }
+    }
+    int ttop()
+    {
+        if (!stk.empty())
+        {
+            return stk.top();
+        }
+        else
+        {
+            throw runtime_error("Stack is empty!");
+        }
+    }
+    void display()
+    {
+        stack<int> temp = stk;
+        while (!temp.empty())
+        {
+            cout << temp.top() << " ";
+            temp.pop();
+        }
+    }
+    bool isEmpty()
+    {
+        return stk.empty();
+    }
+};
+int main()
+{
+    Stack s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.display();
+    if (s.isEmpty())
+    {
+        cout << "Stack is empty" << endl;
+    }
+    else
+    {
+        cout << "sorry" << endl;
+    }
+    cout << endl;
+    return 0;
+}

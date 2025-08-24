@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    vector<int> array = {4, 5, 2, 25};
+    vector<int> array = {14, 55, 21, 25};
     stack<int> stk;
     vector<int> ans(array.size(), -1);
     for (int i = array.size() - 1; i >= 0; i--)
@@ -13,9 +13,9 @@ int main()
         {
             stk.push(array[i]);
         }
-        if (!stk.empty())
+        else 
         {
-            if (stk.top() > array[i - 1])
+            if ( i - 1 >= 0 && stk.top() > array[i - 1]  )
             {
                 ans[i - 1] = stk.top();
                 stk.push(array[i - 1]);

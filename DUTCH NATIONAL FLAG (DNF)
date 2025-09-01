@@ -1,0 +1,37 @@
+#include <iostream>
+#include <array>
+using namespace std;
+int main()
+{
+
+    int array[8] = {1, 2, 0, 1, 2, 0, 1, 2};
+    int start = 0;
+    int end = 7;
+    int mid = 0;
+    while (mid <= end)
+    {
+        if (array[mid] == 0)
+        {
+            swap(array[mid], array[start]);
+            start++;
+            mid++;
+        }
+         else if (array[mid] == 1)
+        {
+            mid++;
+        }
+        else
+        {
+            swap(array[mid], array[end]);
+            end--;
+        }
+    }
+    for (int i : array)
+    {
+        cout << i << " ";
+    } cout<<endl;
+    
+    
+
+    return 0;
+}

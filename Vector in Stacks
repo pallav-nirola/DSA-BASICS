@@ -29,6 +29,11 @@ public:
     bool isEmpty()
     {
         return v.empty();
+// v.empty() is a built-in member function of std::vector.
+
+//It returns a bool:
+//true if the vector has no elements.
+//false if the vector contains at least one element
     }
 };
 int main()

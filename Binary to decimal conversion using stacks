@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+string decimaltobinary(int n ){
+    
+    string binary = "";
+    while(n>0){
+       int remainder = n %2;
+       if(remainder==0){
+           binary = binary + '0';
+       }
+       else{
+           binary = binary + '1';
+       }
+       n=n/2;
+    }
+    reverse(binary.begin(), binary.end())
+   return binary;  
+}
+using namespace std;
+int main(){
+    int n ;
+    cin>>n;
+  for(int i = 0 ; i<n ; i++){
+        cout<<  decimaltobinary(i);
+        cout<<"  ";
+  }
+    return 0 ;
+}

@@ -1,0 +1,39 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+
+queue <int>q;
+void pushh(){
+q.push(2);
+q.push(3);
+q.push(4);
+q.push(5);
+
+}
+int front(){
+return q.front();
+}
+int back(){
+    return q.back();
+}
+void popp(){
+    q.pop();
+}
+void display(){
+    queue <int> copy = q;
+    while(copy.empty()==0){
+        
+        cout<<copy.top<<" ";
+        copy.pop();
+        
+    }
+}
+
+int main(){
+    
+    pushh();
+    display();
+    
+  return 0 ;  
+    
+}

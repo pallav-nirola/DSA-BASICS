@@ -70,6 +70,25 @@ public:
         delete tail;
         tail = AbhiKyLiy;
     }
+void insert_at_position(int val, int pos)
+    {
+        Node *newNode = new Node(val);
+        if (pos == 0)
+        {
+            push_front(val);
+        }
+        else
+        {
+            Node *temp = head;
+
+            for (int i = 0; i < pos - 1; i++)
+            {
+                temp = (*temp).next;
+            }
+            (*newNode).next = (*temp).next;
+            (*temp).next = newNode;
+        }
+    }
     void display()
     {
         Node *temp = head;

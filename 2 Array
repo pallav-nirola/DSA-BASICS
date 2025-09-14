@@ -1,0 +1,195 @@
+// // // #include<iostream>
+// // // using namespace std;
+// // // bool search(int target, int array[][3], int rows , int cols){
+// // // for (int i = 0; i < rows; i++)
+// // // {
+// // //    for (int j = 0; j < cols; j++)
+// // //    {
+// // //     if (array[i][j]==target)
+// // //     {
+// // //         cout<<"found at "<<i<<","<<j<<endl;
+// // //         return true;
+// // //     }
+
+// // //    }
+
+// // // }
+// // // return false;
+
+// // // }
+// // // int main() {
+// // //     int array[4][3]= {{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
+// // //     cout<<search(5,array,4,3);
+// // //     return 0;
+// // // }
+// // // #include <iostream>
+// // // #include <vector>
+
+// // // using namespace std;
+// // // int sum(int array[][4], int rows, int cols, int sum)
+// // // {
+
+// // //     vector<int> v;
+// // //     for (int i = 0; i < rows; i++)
+// // //     {
+// // //         for (int j = 0; j < cols; j++)
+// // //         {
+// // //             sum = sum + array[i][j];
+// // //         }
+// // //         v.push_back(sum);
+// // //         sum = 0;
+// // //     }
+// // //     int max = v[0];
+// // //     for (int i = 1; i < v.size(); i++)
+// // //     {
+// // //         if (v[i] > max)
+// // //         {
+// // //             max = v[i];
+// // //         }
+// // //     }
+// // //     cout << "max sum is " << max << endl;
+// // // }
+// // // int main()
+// // // {
+// // //     int array[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+// // //     sum(array, 3, 4, 0);
+// // //     return 0;
+// // // }
+// // #include <iostream>
+// // #include <vector>
+
+// // using namespace std;
+// // vector<int> v;
+// // void Primary_sum(int array[][4], int rows, int cols)
+// // {
+
+// //     int sum = 0;
+// //     for (int i = 0; i < rows; i++)
+// //     {
+// //         for (int j = 0; j < cols; j++)
+// //         {
+// //             if (i == j)
+// //             {
+// //                 sum = sum + array[i][j];
+// //             }
+// //         }
+// //         v.push_back(sum);
+// //         sum = 0;
+// //     }
+// // }
+// // void Secondary_sum(int array[][4], int rows, int cols)
+// // {
+// //     int sum = 0;
+// //     for (int i = 0; i < rows; i++)
+// //     {
+// //         for (int j = 0; j < cols; j++)
+// //         {
+// //             if ((i + j) + 1 == cols)
+// //             {
+// //                 sum = sum + array[i][j];
+// //             }
+// //         }
+// //         v.push_back(sum);
+// //         sum = 0;
+// //     }
+// // }
+// // void add_sum()
+// // {
+// //     int total = 0;
+// //     for (int i = 0; i < v.size() / 2; i++)
+// //     {
+// //         total = total + v[i];
+// //     }
+// //     cout << "total Primary sum is " << total << endl;
+// //     int temp = total;
+// //     total = 0;
+
+// //     for (int i = v.size() / 2; i < v.size(); i++)
+// //     {
+// //         total = total + v[i];
+// //         cout << "total Secondary sum is " << total << endl;
+// //     }
+// //     cout << "total sum is   " << temp + total << endl;
+// // }
+
+// // int main()
+// // {
+// //     int array[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+// //     Primary_sum(array, 4, 4);
+// //     Secondary_sum(array, 4, 4);
+// //     add_sum();
+// //     return 0;
+// // }
+// // // optimised code
+// // #include<iostream>
+// // using namespace std;
+// // void dia_sum(int array[][4], int rows, int cols){
+// //     int primary_sum = 0;
+// //     int secondary_sum = 0;
+// //    for (int i = 0; i < rows; i++)
+// //    {
+// //     primary_sum = primary_sum + array[i][i];
+// //     secondary_sum = secondary_sum + array[i][cols-i-1];
+// //    }
+// //    cout<<"total primary diagonal sum is "<<primary_sum<<endl;
+// //    cout<<"total secondary diagonal sum is "<<secondary_sum<<endl;
+// //     cout<<"total sum is "<<primary_sum+secondary_sum<<endl;
+// // }
+// // int main() {
+// //     int array[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+// //     cout<<endl;
+// //     dia_sum(array,4,4);
+// //     return 0;
+// // }
+// // address of array[i][j]=base address+(i×cols+j)×sizeof(int)
+// #include <iostream>
+// using namespace std;
+// int main()
+// {
+//     int array[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+//     int row = 4;
+//     int cols = 4;
+//     int key = 15;
+    
+    
+
+//     int start_row = 0;
+//     int end_row = row - 1;
+//     while (start_row <= end_row)
+//     {
+//         int mid_row = start_row + (end_row - start_row) / 2;
+//         if (key >= array[mid_row][0] && key <= array[mid_row][cols - 1])
+//         {
+//             int start = 0;
+//             int end = cols - 1; // cannot decalre outside the loop as it will become global variable and won't be modified afterwards
+            
+//             while (start <= end)
+//             {
+//                 int mid = start + (end - start) / 2;
+//                 if (array[mid_row][mid] == key)
+//                 {
+//                     cout << "found at " << mid_row << "," << mid << endl;
+//                     return 0 ;
+//                 }
+//                 else if (key > array[mid_row][mid])
+//                 {
+//                     start = mid + 1;//cannot do mid++ as it will first make start aas mid then it will update but we want instant update
+//                 }
+//                 if (key < array[mid_row][mid])
+//                 {
+//                     end = mid-1;//cannot do mid-- as it will first make start aas mid then it will update but we want instant updat
+//                 }
+//             }
+//         }
+//         else if (key > array[mid_row][cols - 1])
+//         {
+//             start_row = (mid_row) + 1;
+//         }
+//         if (key < array[mid_row][0])
+//         {
+//             end_row = (mid_row)-1;
+//         }
+//     }
+
+//     return 0;
+// }

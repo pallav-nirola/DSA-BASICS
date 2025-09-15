@@ -2,6 +2,8 @@
 #include <queue>
 
 using namespace std;
+    queue<int> q;
+
 
 void insertInSortedOrder(queue<int>& q, int element) {
     int n = q.size();
@@ -27,23 +29,25 @@ void sortQueue(queue<int>& q) {
         return;
     }
 
-    int front = q.front();
+    int samne = q.front();
     q.pop();
 
     sortQueue(q);
 
-    insertInSortedOrder(q, front);
+    insertInSortedOrder(q, samne);
+}
+void pushh(int val){
+    q.push(val);
 }
 
 int main() {
-    queue<int> q;
 
-    q.push(3);
-    q.push(4);
-    q.push(2);
-    q.push(5);
-    q.push(1);
-    q.push(6);
+    pushh(3);
+    pushh(4);
+    pushh(2);
+    pushh(5);
+    pushh(1);
+    pushh(6);
 
     cout << "Original queue: ";
     queue<int> temp = q;

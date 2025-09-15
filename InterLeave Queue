@@ -56,3 +56,20 @@ int main()
 
     return 0;
 }
+2nd approach using 3 queues
+ queue<int> orginial;
+    queue<int> temporary;
+    queue<int> answer;
+int n = orginial.size();
+    for (int i = 0; i < n/2; i++)
+    {
+        temporary.push(orginial.front());
+        orginial.pop();
+    }
+    for (int i = 0; i < n/2; i++)
+    {
+        answer.push(temporary.front());
+        answer.push(orginial.front());
+        temporary.pop();
+        orginial.pop();
+    }

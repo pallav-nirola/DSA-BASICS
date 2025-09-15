@@ -5,7 +5,7 @@ void reverse(queue<int> &que){
 if (que.empty()==1)
 {
   return ;
-}
+} // how cna i write the code if I were to write the function as int instead of of void
 int x = que.front();
 reverse(que);
 que.push(x);

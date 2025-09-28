@@ -6,31 +6,31 @@ public:
     int data;
     Node *next;
 
-    Node(int value)
+    Node(int val)
     {
-        data = value;
+        data = val;
         next = NULL;
     }
 };
-
-class LinkedLists
+class LinkedList
 {
 private:
     Node *head;
     Node *tail;
 
 public:
-    LinkedLists()
+    LinkedList()
     {
         head = NULL;
         tail = NULL;
     }
-    void insert(int val)
+    void push_front(int val)
     {
         Node *newNode = new Node(val);
         if (head == NULL)
         {
-            head = tail = newNode;
+            head = newNode;
+            tail = newNode;
         }
         else
         {
@@ -43,70 +43,35 @@ public:
         Node *newNode = new Node(val);
         if (head == NULL)
         {
-            head = tail = newNode;
+            newNode = head;
+            newNode = tail;
         }
         else
         {
-            (*tail).next = newNode;
+
+            (*newNode).next = tail;
             tail = newNode;
         }
     }
     void pop_front()
     {
-        Node *filhaal = head;
+        Node *temp = head;
         head = (*head).next;
-        (*filhaal).next = NULL;
-        delete filhaal;
+        (*temp).next = NULL;
+        delete temp;
     }
     void pop_back()
     {
-        Node *AbhiKyLiy = head;
-        while ((*AbhiKyLiy).next != tail)
+
+        Node *temp = head;
+        while ((*temp).next != tail)
         {
-            AbhiKyLiy = (*AbhiKyLiy).next;
+            temp = (*temp).next;
         }
 
-        (*AbhiKyLiy).next = NULL;
+        temp = NULL;
         delete tail;
-        tail = AbhiKyLiy;
-    }
-void search(int key)
-    {
-        Node *Temp;
-        Temp = head;
-        int idx = 0;
-        while (Temp != NULL)
-        {
-            if ((*Temp).data == key)
-            {
-                cout << "Yes we have found that " << idx << endl;
-                return;
-            }
-            else
-            {
-                Temp = (*Temp).next;
-                idx++;
-            }
-        }
-    }
-void insert_at_position(int val, int pos)
-    {
-        Node *newNode = new Node(val);
-        if (pos == 0)
-        {
-            push_front(val);
-        }
-        else
-        {
-            Node *temp = head;
-
-            for (int i = 0; i < pos - 1; i++)
-            {
-                temp = (*temp).next;
-            }
-            (*newNode).next = (*temp).next;
-            (*temp).next = newNode;
-        }
+        tail = temp;
     }
     void display()
     {
@@ -117,23 +82,99 @@ void insert_at_position(int val, int pos)
             temp = (*temp).next;
         }
     }
+    void search(int val)
+    {
+        Node *temp = head;
+        int count = 0;
+        while (temp != NULL)
+        {
+            if ((*temp).data == val)
+            {
+                cout << "Value found at count " << count << endl;
+
+                break;
+            }
+            else
+            {
+                count++;
+                temp = (*temp).next;
+            }
+        }
+    }
+    void inser_at_pos(int val, int pos)
+    {
+        Node *newNode = new Node(val);
+        if (pos == 0)
+        {
+            push_front(val);
+        }
+        else
+        {
+
+            Node *temp = head;
+            for (int i = 0; i < pos - 1; i++)
+            {
+                temp = (*temp).next;
+            }
+            (*newNode).next = (*temp).next;
+            (*temp).next = newNode;
+        }
+    }
+    void delete_at_pos(int pos)
+    {
+        if (pos == 0)
+        {
+            pop_front();
+        }
+        else
+        {
+
+            Node *temp = head;
+            for (int i = 0; i < pos - 1; i++)
+            {
+                temp = (*temp).next;
+            }
+            (*temp).next = (*(*temp).next).next;
+            delete (*temp).next;
+        }
+    }
+    void reverse()
+    {
+        Node *curr = head;
+        Node *prev = NULL;
+        Node *NEXT = NULL;
+        while (curr != NULL)
+        {
+            NEXT = curr->next;
+            (*curr).next = prev;
+            prev = curr;
+            curr = NEXT;
+        }
+        head = prev;
+    }
+       Node *merge2Lists(Node *h1, Node *h2)
+    {
+        if (h1 == NULL)
+            return h2;
+        if (h2 == NULL)
+            return h1;
+        if ((*h1).data <= (*h2).data)
+        {
+            
+            (*h1).next = merge2Lists((*h1).next, h2);
+            return h1;
+        }
+        if ((*h1).data > (*h2).data)
+        {
+            
+            (*h2).next = merge2Lists(h1, (*h2).next);
+            return h2;
+        }
+    }
 };
 
 int main()
 {
-    LinkedLists Lists;
-    Lists.insert(2);
-    Lists.insert(3);
-    Lists.insert(4);
-    Lists.insert(5);
-    Lists.push_back(6);
-    Lists.push_back(7);
-    Lists.pop_front();
-     Lists.pop_back();
-    Lists.display();
-   
 
     return 0;
 }
-
-           

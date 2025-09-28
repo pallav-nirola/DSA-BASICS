@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+    int mat[4][4] = {{1, 2, 3, 4},
+                     {5, 6, 7, 8},
+                     {9, 10, 11, 12},
+                     {13, 14, 15, 16}};
+    int row = 4;
+    int col = 4;
+    int st_row = 0;
+    int st_col = 0;
+    int end_row = row - 1;
+    int end_col = col - 1;
+    vector<int> ans;
+    while (st_row <= end_row && st_col <= end_col)
+    {
+        for (int i = st_col; i <= end_col; i++)
+        { // upper bound
+            ans.push_back(mat[st_row][i]);
+        }
+        for (int i = st_row + 1; i <= end_row; i++)
+        { // right bound
+            ans.push_back(mat[i][end_col]);
+        }
+        for (int i = end_col - 1; i >= st_col; i--)
+        { // lower bound
+            if (st_row == end_row)
+            {
+                break;// fro odd_row matrix condition 
+            }
+
+            ans.push_back(mat[end_row][i]);
+        }
+        for (int i = end_row - 1; i >= st_row + 1; i--)
+        { // left_bound
+            if (st_col == end_col)
+            {
+                break;// fro odd_col matrix condition  
+            }
+
+            ans.push_back(mat[i][st_col]);
+        }
+        st_col++;
+        st_row++;
+        end_col--;
+        end_row--;
+    }
+    for (int i = 0; i <= ans.size() - 1; i++)
+    {
+
+        cout << ans[i] << " ";
+    }
+
+    return 0;
+}

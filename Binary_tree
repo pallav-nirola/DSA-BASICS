@@ -169,6 +169,34 @@ int sumNode(Node *root){
         return (leftsum + rightsum + (*root).data);
     }
 }
+bool isIdentical(Node *p, Node *q)
+{
+
+    if (p == NULL && q == NULL)
+    {
+        return true;
+    }
+    if (p == NULL || q == NULL)
+    {
+        return false;
+    }
+    if ((*p).data != (*q).data)
+    {
+        return false;
+    }
+    bool leftSum = isIdentical((*p).left, (*q).left);
+    if (leftSum == false)
+    {
+        return false;
+    }
+bool rightSum = isidentical((*p).right, (*q).right);
+    if (rightSum == false)
+    {
+        return false;
+    }
+    return true;
+    
+}
 int main()
 {
     vector<int> preOrder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};

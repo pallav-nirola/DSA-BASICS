@@ -203,6 +203,9 @@ bool isSubtree(Node* root, Node* subRoot) {
     if ((*root).data == (*subRoot).data) {
         if (isIdentical(root, subRoot)) return true;
     }
+else{
+        // continue searching in left and right subtree
+    }
 
     bool leftCheck = isSubtree((*root).left, subRoot);
     if (leftCheck == true) return true;

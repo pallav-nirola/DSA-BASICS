@@ -133,6 +133,42 @@ void levelOrderLineWise_traversal(Node *root)
     }
     cout << endl;
 }
+
+int heightMax(Node *root){
+    if (root==NULL)
+    {
+        return 0;
+    }
+    else{
+        int leftHeight = heightMax((*root).left);
+        int rightHeight = heightMax((*root).right);
+        return max(leftHeight, rightHeight) + 1;
+    }
+}
+int countNode(Node *root){
+
+    if (root==NULL)
+    {
+        return 0;
+    }
+    else{
+        int leftCount = countNode((*root).left);
+        int rightCount = countNode((*root).right);
+        return (leftCount + rightCount + 1);
+    }
+    
+}
+int sumNode(Node *root){
+    if (root==NULL)
+    {
+        return 0;
+    }
+    else{
+        int leftsum = sumNode((*root).left);
+        int rightsum = sumNode((*root).right);
+        return (leftsum + rightsum + (*root).data);
+    }
+}
 int main()
 {
     vector<int> preOrder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};

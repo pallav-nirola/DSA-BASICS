@@ -131,6 +131,63 @@ void TopViewOfATree(Node *root)
         cout << (*(*itr).second).data << " ";
     }
 }
+void kthLevelRecursion(Node *root, int K)
+{
+
+    if (K == NULL)
+    {
+        return;
+    }
+    if (K == 1)
+    {
+        cout << (*root).data<< endl;
+        return ;
+    }
+    kthLevel((*root).left , K-1);
+    kthLevel((*root).right , K-1);
+}
+void kthLevelIterative(Node *root, int K)
+{
+    if (root == NULL)
+        return;
+
+    queue<Node*> q;
+    q.push(root);
+
+    int level = 1;
+
+    while (!q.empty())
+    {
+        int size = q.size();
+
+        if (level == K)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Node* curr = q.front();
+                q.pop();
+                cout << curr->data << " ";
+            }
+            cout << endl;
+            return;
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            Node* curr = q.front();
+            q.pop();
+
+            if (curr->left != NULL)
+                q.push(curr->left);
+
+            if (curr->right != NULL)
+                q.push(curr->right);
+        }
+
+        level++;
+    }
+}
+
 
 void levelOrderLineWise_traversal(Node *root)
 {

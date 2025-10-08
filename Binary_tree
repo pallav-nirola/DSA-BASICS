@@ -96,6 +96,42 @@ void levelOrder_traversal(Node *root)
     }
     cout << endl;
 }
+void TopViewOfATree(Node *root)
+{
+    if (root == NULL)
+        return;
+    queue<pair<Node *, int>> q;
+    map<int, Node *> m;
+    q.push({root, 0});
+    while (q.empty() == 0)
+    {
+
+        map<int, Node *> ::iterator it;
+
+        Node *temp = q.front().first; // for pair 1 of q
+        int *hd = q.front().second;// for pair 2 of q
+        it = m.find(hd);
+        q.pop();
+        if (it == m.end())
+        {
+            m[hd] = temp;
+        }
+        if ((*temp).left != NULL)
+        {
+            q.push({(*temp).left, hd - 1});
+        }
+        if ((*temp).right != NULL)
+        {
+            q.push({(*temp).right, hd + 1});
+        }
+    }
+    map<int, Node *>::iterator itr;
+    for (itr = m.begin(); itr != m.end(); itr++)
+    {
+        cout << (*(*itr).second).data << " ";
+    }
+}
+
 void levelOrderLineWise_traversal(Node *root)
 {
     queue<Node *> q;

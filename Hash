@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Heap {
+public:
+    vector<int> arr;
+
+    
+    Heap() {
+        arr.push_back(-1); 
+    }
+
+    
+    void insert(int val) {
+        arr.push_back(val);
+        int index = arr.size() - 1; 
+
+        
+        while (index > 1) {
+            int parent = index / 2;
+
+            if (arr[parent] < arr[index]) {
+                swap(arr[parent], arr[index]);
+                index = parent;  
+            } else {
+                break; 
+            }
+        }
+    }
+
+    void printHeap() {
+        for (int i = 1; i < arr.size(); i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Heap h;
+    h.insert(50);
+    h.insert(55);
+    h.insert(53);
+    h.insert(52);
+    h.insert(54);
+
+    cout << "Heap elements: ";
+    h.printHeap();
+
+    return 0;
+}

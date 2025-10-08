@@ -226,6 +226,24 @@ void levelOrderLineWise_traversal(Node *root)
     }
     cout << endl;
 }
+Node* LowestCommonAncestoral(Node* root, int p, int q) {
+    if (root == NULL) return NULL;
+
+    if (root->data == p || root->data == q)
+        return root;
+
+    Node* leftLCA = LowestCommonAncestoral(root->left, p, q);
+    Node* rightLCA = LowestCommonAncestoral(root->right, p, q);
+
+    if (leftLowestCommonAncestoral != NULL && rightLowestCommonAncestoral != NULL)
+        return root;
+
+    if (leftLowestCommonAncestoral != NULL)
+        return leftLowestCommonAncestoral;
+    else
+        return rightLowestCommonAncestoral;
+}
+
 
 int heightMax(Node *root){
     if (root==NULL)

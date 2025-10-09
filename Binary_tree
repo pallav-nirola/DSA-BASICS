@@ -187,6 +187,17 @@ void kthLevelIterative(Node *root, int K)
         level++;
     }
 }
+int SumNodeTree(Node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int LeftSum = SumNodeTree((*root).left);
+    int RightSum = SumNodeTree((*root).right);
+    ((*root).data) = ((*root).data) + leftSum + RightSum;
+    return (*root).data;
+}
 
 
 void levelOrderLineWise_traversal(Node *root)

@@ -17,18 +17,17 @@ public:
         l[u].push_back(v);
         l[v].push_back(u);
     }
-    void bfsTraversal()
+    void bfsTraversal(int src , vector<bool> visited(vertex , false))
     {
         queue<int> q;
-        vector<bool> visited(vertex, false);
-        q.push(0);
+        q.push(src);
         visited[0] = true;
         while (q.empty() == 0)
         {
-            int src = q.front();
+            int temp = q.front();
             q.pop();
-            cout << src << " ";
-            for (int neighbour : l[src])
+            cout << temp << " ";
+            for (int neighbour : l[temp])
             {
                 if (visited[neighbour] != true)
                 {

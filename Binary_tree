@@ -60,6 +60,33 @@ void inOrder_traversal(Node *root) // left root right
         inOrder_traversal((*root).right);
     }
 }
+void morrisInorder(Node* root) {
+    Node* curr = root;
+    while (curr != nullptr) {
+        if (curr->left == nullptr) {
+            // Print the current node
+            cout << curr->data << " ";
+            curr = curr->right;
+        } else {
+            // Find the inorder predecessor of curr
+            Node* pre = curr->left;
+            while (pre->right != nullptr && pre->right != curr)
+                pre = pre->right;
+
+            // Make current as the right child of its inorder predecessor
+            if (pre->right == nullptr) {
+                pre->right = curr; // Create a thread
+                curr = curr->left;
+            } 
+            // Revert the changes made (remove the thread)
+            else {
+                pre->right = nullptr;
+                cout << curr->data << " ";
+                curr = curr->right;
+            }
+        }
+    }
+}
 void postOrder_traversal(Node *root)
 { // left right root
 

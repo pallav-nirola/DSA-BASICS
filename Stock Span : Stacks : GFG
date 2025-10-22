@@ -23,3 +23,51 @@ int span_count = 1;
     }
     return 0;
 }
+// stack approach 
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+int main() {
+    vector<int> prices = {6, 8, 7, 1, 3};
+    int n = prices.size();
+    vector<int> span(n, 1); // span at least 1
+    stack<pair<int,int>> stk; // {index, price}
+
+    for (int i = 0; i < n; i++)
+    {
+        if (stk.empty() == 1)
+        {
+            stk.push({i, prices[i]});
+        }
+        else
+        {
+            if (prices[i] > stk.top().second)
+            {
+                // pop smaller/equal elements to get correct span
+                while (stk.empty() == 0 && stk.top().second <= prices[i])
+                {
+                    stk.pop();
+                }
+
+                if (stk.empty() == 0)
+                    span[i] = i - stk.top().first;
+                else
+                    span[i] = i + 1;
+
+                stk.push({i, prices[i]});
+            }
+            else
+            {
+                // current price ≤ top price
+                span[i] = 1; // only itself counts
+                stk.push({i, prices[i]});
+            }
+        }
+    }
+    cout << "Stock Span: ";
+    for (int s : span)
+        cout << s << " ";
+    cout << endl;
+    return 0;
+}

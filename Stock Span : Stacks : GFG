@@ -5,22 +5,21 @@ int main()
 {
     int prices[] = {100, 80, 60, 70, 60, 75, 85};
     int n = sizeof(prices) / sizeof(prices[0]);
-    int span[n];
+   vector<int>span;
     for (int i = 0; i < n; i++)
     {
-
-        span[i] = 1;
+int span_count = 1;
         int j = i - 1;
         while (j >= 0 && prices[i] >= prices[j])
         {
-            span[i]++;
+          span_count++;
             j--;
         }
+        span.push_back(span_count);
     }
     for (int i = 0; i < n; i++)
     {
         cout << span[i] << " ";
     }
-
     return 0;
 }

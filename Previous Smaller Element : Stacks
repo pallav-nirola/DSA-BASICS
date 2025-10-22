@@ -1,0 +1,39 @@
+ vector<int> array = {6, 0, 8, 1, 3};
+    vector<int> ans(array.size(), -1);
+    stack<int> stk;
+    for (int i = 0; i < array.size(); i++)
+    {
+        if (stk.empty() == 1)
+        {
+            stk.push(array[i]);
+        }
+        else
+        {
+            if (array[i] > stk.top())
+            {
+                ans[i] = stk.top();
+                stk.push(array[i]);
+            }
+            else
+            {
+                while (stk.empty() == 0 && array[i] <= stk.top())
+                {
+                    stk.pop();
+                }
+                if (stk.empty() == 0)
+                {
+                    ans[i] = stk.top();
+                   
+                }
+                 stk.push(array[i]);
+            }
+        }
+    }
+
+    for (int i = 0; i < array.size(); i++)
+    {
+        cout << ans[i] << " ";
+    }
+
+    return 0;
+}

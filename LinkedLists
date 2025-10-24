@@ -139,6 +139,22 @@ public:
         }
     }
 
+void deleteData(int key){
+    Node *Temp = head;
+    for (int i = 0; (*Temp).next!= NULL;   i++)
+    {
+       if ((*(*Temp).next).data == key)
+       {
+       cout<<"LOCATED "<<i;
+       Node *toDelete = (*Temp).next;
+       (*Temp).next = (*toDelete).next;
+       delete toDelete;
+       return ;
+       }
+       Temp = (*Temp).next;  
+    }
+   }
+
     void reverse()
     {
         Node *curr = head;
@@ -166,8 +182,7 @@ public:
             return h1;
         }
         if ((*h1).data > (*h2).data)
-        {
-            
+        { 
             (*h2).next = merge2Lists(h1, (*h2).next);
             return h2;
         }

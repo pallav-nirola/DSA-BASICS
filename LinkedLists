@@ -138,6 +138,7 @@ public:
             delete (*temp).next;
         }
     }
+
     void reverse()
     {
         Node *curr = head;

@@ -66,25 +66,26 @@ else{
         delete temp;
 }
     }
-    void pop_back()
-    {
+   void pop_back()
+{
+    if (head == NULL) return;
 
- if (head == NULL) return;
     if (head == tail) {
         delete head;
         head = tail = NULL;
         return;
     }
-        Node *temp = head;
-        while ((*temp).next != tail)
-        {
-            temp = (*temp).next;
-        }
 
-        temp = NULL;
-        delete tail;
-        tail = temp;
+    Node *temp = head;
+    while (temp->next != tail) {
+        temp = temp->next;
     }
+    temp->next = NULL;  // break link first
+    delete tail;        // delete old tail
+    tail = temp;        // update tail
+}
+
+
     void display()
     {
         Node *temp = head;

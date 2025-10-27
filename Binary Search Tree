@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
-
 class Node
 {
 public:
@@ -11,27 +9,22 @@ public:
     Node *right;
     Node(int v)
     {
-
         val = v;
         left = NULL;
         right = NULL;
     }
 };
-
 Node *insertBST(Node *root, int val)
 {
     if (root == NULL)
         return new Node(val);
-
     if (val < (*root).val)
         (*root).left = insertBST((*root).left, val);
-
     else
         (*root).right = insertBST((*root).right, val);
 
     return root;
 }
-
 Node *buildBST(const vector<int> &nums)
 {
     Node *root = NULL;
@@ -41,7 +34,6 @@ Node *buildBST(const vector<int> &nums)
 }
 bool search(Node *root, int key)
 {
-
     if (root == NULL)
     {
         return false;
@@ -59,7 +51,49 @@ bool search(Node *root, int key)
         return search((*root).left, key);
     }
 }
-
+Node* getInorderSuccessor(Node* root) {
+    //  successor is the leftmost node in the right subtree
+    while (root!=NULL && root->left != nullptr) {
+        root = root->left;
+    }
+    return current;
+}
+Node* delNode(Node* root, int key) {
+    // 1. Base Case: If the tree is empty
+    if (root == nullptr) {
+        return NULL; // or return NULL;
+    }
+    // 2. Recursive calls to find the node to delete
+    if (key < root->data) {
+        // Key is in the left subtree
+        root->left = delNode(root->left, key);
+    } else if (key > root->data) {
+        // Key is in the right subtree
+        root->right = delNode(root->right, key);
+    } else {
+        // 3. Node found: key == root->data        
+        // Case A: Node with only one child or no child (0 or 1 child)
+        if (root->left == nullptr) {
+            // No left child (or no children at all)
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            // No right child
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }         
+        // Case B: Node with two children (2 children)
+        // Find the in-order successor (smallest in the right subtree)
+        else if (root->left != nullptr && root->right != nullptr) {
+        Node* IS = getInorderSuccessor(root->right);        
+        // Copy the in-order successor's content to this node
+        root->data = IS->data;        
+        // Delete the in-order successor from the right subtree
+        root->right = delNode(root->right, IS->data);
+        }
+    }
 void inorder(Node *root)
 {
     if (!root)
@@ -68,16 +102,12 @@ void inorder(Node *root)
     cout << (*root).val << " ";
     inorder((*root).right);
 }
-
 int main()
 {
     vector<int> values = {8, 3, 10, 1, 6, 14, 4, 7, 13};
-
     Node *root = buildBST(values);
-
     cout << "Inorder Traversal of BST: ";
     inorder(root);
     cout << endl;
-
     return 0;
 }

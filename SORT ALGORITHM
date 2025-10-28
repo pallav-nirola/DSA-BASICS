@@ -1,0 +1,93 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int getMinFunc(vector<int> &v, int start)
+{
+    int minIndex = start;
+    for (int i = start; i < v.size(); i++)
+    {
+        if (v[i] < v[minIndex])
+        {
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+void print_selection_sort(vector<int> &v)
+{
+    for (int i = 0; i <= v.size() - 2; i++)
+    {
+        int minIndex = getMinFunc(v, i);
+        swap(v[i], v[minIndex]);
+    }
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
+void selection_sort_algorithimic_approach(vector<int> &v) {
+    for (int i = 0; i < v.size() - 1; i++) {
+        int minIndex = distance(v.begin(), min_element(v.begin() + i, v.end()));//convert value of iterator to index
+        swap(v[i], v[minIndex]);
+    }
+}
+void bubble_sort(vector<int> &v)
+{
+    for (int i = 0; i <= v.size() - 2; i++)
+    {
+
+        for (int j = 0; j < (v.size() - 1) - i; j++)
+        {
+            if (v[j] > v[j + 1])
+            {
+                swap(v[j], v[j + 1]);
+            }
+        }
+    }
+}
+void insertElement(vector<int> &v, int i)
+{
+    int key = v[i];
+    int j = i - 1;
+
+    while (j >= 0 && v[j] > key)
+    {
+        v[j + 1] = v[j];
+        j--;
+    }
+
+    v[j + 1] = key;
+}
+void print_insertion_sort(vector<int> &v)
+{
+    int n = v.size();
+    for (int i = 1; i < n; i++)
+    {
+        if (v[i] < v[i - 1])
+        {
+            insertElement(v, i);
+        }
+    }
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+}
+
+int main()
+{
+    vector<int> arr = {13, 46, 24, 52, 20, 9};
+    print_insertion_sort(arr);
+    return 0;
+}
+
+int main()
+{
+    vector<int> vec = {13, 46, 24, 52, 20, 9};
+    print_selection_sort(vec);
+    bubble_sort(vec);
+    return 0;
+}

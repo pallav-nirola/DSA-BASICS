@@ -294,6 +294,16 @@ int heightMax(Node *root){
         return max(leftHeight, rightHeight) + 1;
     }
 }
+bool isBalancedTrreBOOL(Node *root)
+{
+    if (root == NULL)
+        return true;
+    int heightleft = heightMax(root->left);
+    int heightright = heightMax(root->right);
+    if (abs(heightleft - heightright) <= 1 && isBalancedTrreBOOL(root->left) && isBalancedTrreBOOL(root->right))
+        return true;
+    return false;
+}
 int countNode(Node *root){
 
     if (root==NULL)

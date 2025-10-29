@@ -294,7 +294,7 @@ int heightMax(Node *root){
         return max(leftHeight, rightHeight) + 1;
     }
 }
-bool isBalancedTrreBOOL(Node *root)
+bool isBalancedTrreBOOL(Node *root)//O(n^2) approach;
 {
     if (root == NULL)
         return true;
@@ -303,6 +303,30 @@ bool isBalancedTrreBOOL(Node *root)
     if (abs(heightleft - heightright) <= 1 && isBalancedTrreBOOL(root->left) && isBalancedTrreBOOL(root->right))
         return true;
     return false;
+}
+int checkBalance(Node* root)//O(n) approach
+{
+    if (root == NULL)
+        return 0;
+    int leftHeight = checkBalance(root->left);
+    if (leftHeight == -1) return -1;
+
+    int rightHeight = checkBalance(root->right);
+    if (rightHeight == -1) return -1;
+
+    if (abs(leftHeight - rightHeight) > 1)
+        return -1;
+        else{
+    return max(leftHeight, rightHeight) + 1;
+        }
+}
+bool isBalanced(Node* root)
+{
+    int result = checkBalance(root);
+    if (result == -1)
+        return false; 
+    else
+        return true;  
 }
 int countNode(Node *root){
 

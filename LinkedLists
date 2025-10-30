@@ -203,6 +203,44 @@ void deleteData(int key) {
             return h2;
         }
     }
+void deleteRepeatedOccurances(Node *head, int key)
+    {
+        Node *temp = head;
+        Node *prev = NULL;
+        while (temp != NULL)
+
+        {
+            if ((*temp).data == key)
+            {
+                if (temp == head)
+                {
+                    pop_front();
+                    temp = head;
+                }
+                else if (temp == tail)
+                {
+                    pop_back();
+                    temp = NULL;
+
+                }
+
+                else
+                {
+
+                    (*prev).next = ((*temp).next);
+                    (*temp).next = NULL;
+                    delete temp;
+                    temp = (*prev).next;
+                }
+            }
+            else
+            {
+              
+                prev = temp;
+                  temp = (*temp).next;
+            }
+        }
+    }
 };
 
 int main()

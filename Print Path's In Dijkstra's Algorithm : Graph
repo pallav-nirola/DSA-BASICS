@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+    // Function to find the shortest distance and path of all vertices from source S
+    vector<int> dijkstra(int V, vector<pair<int, int>> adj[], int S, vector<int> &parent)
+    {
+        // Min-heap (priority queue) -> {distance, node}
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+        // Initialize distances with infinity
+        vector<int> dist(V, 1e9);
+        dist[S] = 0;
+
+        // Initialize parent array (every node’s parent is itself initially)
+        parent[S] = S;
+
+        // Push the source node
+        pq.push({0, S});
+
+        while (!pq.empty())
+        {
+            int dis = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+
+            // Traverse all adjacent nodes
+            for (auto it : adj[node])
+            {
+                int adjNode = it.first;
+                int edgeWeight = it.second;
+
+                // Relaxation step
+                if (dis + edgeWeight < dist[adjNode])
+                {
+                    dist[adjNode] = dis + edgeWeight;
+                    parent[adjNode] = node; // store the parent
+                    pq.push({dist[adjNode], adjNode});
+                }
+            }
+        }
+
+        return dist;
+    }
+
+    // Function to print path from source to node
+    void printPath(int node, vector<int> &parent)
+    {
+        vector<int> path;
+        while (parent[node] != node)
+        {
+            path.push_back(node);
+            node = parent[node];
+        }
+        path.push_back(node); // finally add source
+
+        reverse(path.begin(), path.end());
+
+        for (int i = 0; i < path.size(); i++)
+        {
+            cout << path[i];
+            if (i != path.size() - 1)
+                cout << " -> ";
+        }
+        cout << "\n";
+    }
+};
+
+int main()
+{
+    int V = 6; // Nodes: 0,1,2,3,4,5
+    vector<pair<int, int>> adj[V];
+
+    // Undirected weighted graph
+    adj[0].push_back({1, 4});
+    adj[0].push_back({2, 4});
+
+    adj[1].push_back({0, 4});
+    adj[1].push_back({2, 2});
+
+    adj[2].push_back({0, 4});
+    adj[2].push_back({1, 2});
+    adj[2].push_back({3, 3});
+    adj[2].push_back({5, 1});
+    adj[2].push_back({4, 6});
+
+    adj[3].push_back({2, 3});
+    adj[3].push_back({5, 2});
+
+    adj[4].push_back({2, 6});
+    adj[4].push_back({5, 3});
+
+    adj[5].push_back({4, 3});
+    adj[5].push_back({3, 2});
+    adj[5].push_back({2, 6});
+
+    int source = 0;
+    Solution obj;
+    vector<int> parent(V);
+    for (int i = 0; i < V; i++)
+        parent[i] = i; // initially, each node is its own parent
+
+    vector<int> dist = obj.dijkstra(V, adj, source, parent);
+
+    cout << "Shortest distances and paths from source " << source << ":\n";
+    for (int i = 0; i < V; i++)
+    {
+        cout << "Node " << i << " -> Distance: " << dist[i] << " | Path: ";
+        obj.printPath(i, parent);
+    }
+
+    return 0;
+}

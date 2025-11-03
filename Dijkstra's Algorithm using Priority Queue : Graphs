@@ -32,7 +32,7 @@ public:
                 if (dis + edgeWeight < dist[adjNode])
                 {
                     dist[adjNode] = dis + edgeWeight;
-                    pq.push({dist[adjNode], adjNode});
+                    pq.push({dist[adjNode], adjNode});// if you discover a btter path then only push it in the vector
                 }
             }
         }

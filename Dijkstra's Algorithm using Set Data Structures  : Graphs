@@ -1,0 +1,93 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Dijkstra's Algorithm using set (works only for non-negative weights)
+class Solution
+{
+public:
+    vector<int> dijkstra(int V, vector<pair<int, int>> adj[], int S)
+    {
+        // Set stores {distance, node}
+        set<pair<int, int>> st;
+
+        // Distance array initialized to infinity
+        vector<int> dist(V, 1e9);
+        dist[S] = 0;
+
+        // Insert source with distance 0
+        st.insert({0, S});
+
+        while (!st.empty())
+        {
+            // Extract the node with the smallest distance
+            auto it = *(st.begin());
+            int dis = it.first;
+            int node = it.second;
+            st.erase(it); // Remove from set
+
+            // Traverse all adjacent nodes
+            for (auto adjIt : adj[node])
+            {
+                int adjNode = adjIt.first;
+                int edgeWeight = adjIt.second;
+
+                // Relaxation step
+                if (dis + edgeWeight < dist[adjNode])
+                {
+                    // If already present with higher distance, erase it
+                    if (dist[adjNode] != 1e9)
+                    {
+                        st.erase({dist[adjNode], adjNode});
+                    }
+
+                    // Update distance
+                    dist[adjNode] = dis + edgeWeight;
+                    st.insert({dist[adjNode], adjNode});
+                }
+            }
+        }
+
+        return dist;
+    }
+};
+
+int main()
+{
+    int V = 6; // Nodes: 0, 1, 2, 3, 4, 5
+    vector<pair<int, int>> adj[V];
+
+    // Undirected weighted graph
+    adj[0].push_back({1, 4});
+    adj[0].push_back({2, 4});
+
+    adj[1].push_back({0, 4});
+    adj[1].push_back({2, 2});
+
+    adj[2].push_back({0, 4});
+    adj[2].push_back({1, 2});
+    adj[2].push_back({3, 3});
+    adj[2].push_back({5, 1});
+    adj[2].push_back({4, 6});
+
+    adj[3].push_back({2, 3});
+    adj[3].push_back({5, 2});
+
+    adj[4].push_back({2, 6});
+    adj[4].push_back({5, 3});
+
+    adj[5].push_back({4, 3});
+    adj[5].push_back({3, 2});
+    adj[5].push_back({2, 6});
+
+    int source = 0;
+    Solution obj;
+    vector<int> dist = obj.dijkstra(V, adj, source);
+
+    cout << "Shortest distances from source " << source << ":\n";
+    for (int i = 0; i < V; i++)
+    {
+        cout << "Node " << i << " -> " << dist[i] << "\n";
+    }
+
+    return 0;
+}

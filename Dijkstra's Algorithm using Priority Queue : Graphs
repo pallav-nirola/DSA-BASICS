@@ -24,7 +24,7 @@ public:
             pq.pop();//When you pop a node from the priority queue (node), it means you’re currently at that vertex with distance dis (the shortest distance so far).
 
             // Relax adjacent nodes
-            for (auto it : adj[node])
+            for (auto it : adj[node]) // auto is general for all dat types like general for pair int char , also can use teh synatx of when we make it like int neighbour : aj[node] as for (pair<int , int> neighbour : adj[node])
             {
                 int adjNode = it.first;
                 int edgeWeight = it.second;
@@ -56,8 +56,8 @@ int main()
     adj[2].push_back({0, 4});
     adj[2].push_back({1, 2});
     adj[2].push_back({3, 3});
-    adj[2].push_back({5, 1});
-    adj[2].push_back({4, 6});
+    adj[2].push_back({5, 6});
+    adj[2].push_back({4, 1});
 
     adj[3].push_back({2, 3});
     adj[3].push_back({5, 2});

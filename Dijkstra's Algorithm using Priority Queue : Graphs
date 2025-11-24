@@ -62,7 +62,7 @@ int main()
     adj[3].push_back({2, 3});
     adj[3].push_back({5, 2});
 
-    adj[4].push_back({2, 6});
+    adj[4].push_back({2, 4});
     adj[4].push_back({5, 3});
 
     adj[5].push_back({4, 3});

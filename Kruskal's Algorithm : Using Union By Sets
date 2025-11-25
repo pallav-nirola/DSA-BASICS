@@ -37,8 +37,7 @@ int kruskalMST(int V, vector<tuple<int,int,int>>& edges) {
 
   for (tuple<int,int,int> e : edges) {
     int w, u, v;
-    tie(w,u,v) = e;
-
+    tie(w,u,v) = e; // tie is used for tuple and it unpacks the object weights , u and v 
         if(ds.findUltimatePar(u) != ds.findUltimatePar(v)) {
             ds.unite(u,v);
             mstWeight += w;

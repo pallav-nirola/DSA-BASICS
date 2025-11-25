@@ -22,7 +22,7 @@ public:
     }
 
     // Union by rank
-    void unionByRank(int u, int v) {
+    void Unite_unionByRank(int u, int v) {
         int ulp_u = findUPar(u);
         int ulp_v = findUPar(v);
 
@@ -43,8 +43,8 @@ public:
 // Example usage
 int main() {
     DisjointSet ds(5); // 5 elements: 0..5
-    ds.unionByRank(1, 2);
-    ds.unionByRank(2, 3);
+    ds.Unite_unionByRank(1, 2);
+    ds.Unite_unionByRank(2, 3);
     cout << ds.findUPar(3) << endl; // Should print representative of set containing 3
     return 0;
 }

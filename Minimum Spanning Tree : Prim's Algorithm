@@ -1,45 +1,45 @@
 class Solution
 {
 public:
-    int spanningTree(int V, vector<vector<int>> adj[])
+    int spanningTree(int V, vector<pair<int,int>> adj[])
     {
+        // Min-heap: {weight, node}
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-        vector<int> vis(V, 0);
+        vector<bool> vis(V, false);
 
-        // {weight, node}
-        pq.push({0, 0});
+        pq.push({0, 0}); // Start from node 0 with weight 0
         int sum = 0;
 
         while (!pq.empty())
         {
-
             pair<int, int> it = pq.top();
             pq.pop();
 
             int node = it.second;
             int wt = it.first;
 
-            if (vis[node] == 1){
-                continue;
+            if (vis[node]){
+                continue; // Skip if already visited
             }
-                // add to MST
-                vis[node] = 1;
-                sum += wt;
-
-                for (auto it : adj[node])
-                {
-
-                    int adjNode = it[0];
-                    int edW = it[1];
-
-                    if (!vis[adjNode])
-                    {
-                        pq.push({edW, adjNode});
-                    }
-                }
+            if(vis[node]==false){
+              
             
+            // Add node to MST
+            vis[node] = true;
+            sum += wt;
+
+            // Visit all neighbors (using pair<int,int>)
+            for (pair<int,int> neighbour : adj[node])
+            {
+                int adjNode = neighbour.first;
+                int edW = neighbour.second;
+
+                if (!vis[adjNode])
+                    pq.push({edW, adjNode});
+            }
         }
+    }
 
         return sum;
     }

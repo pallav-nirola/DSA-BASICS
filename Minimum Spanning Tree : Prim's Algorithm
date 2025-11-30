@@ -1,33 +1,46 @@
-class solution
+class Solution
 {
-    int primAlgo(int vertex, int source, vector<pair<int, int>> adj[])
+public:
+    int spanningTree(int V, vector<vector<int>> adj[])
     {
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<bool> visited(vertex, false);
 
-        pq.push({0, source});
+        vector<int> vis(V, 0);
 
+        // {weight, node}
+        pq.push({0, 0});
         int sum = 0;
-        while (pq.empty() == 0)
+
+        while (!pq.empty())
         {
-            int weight = pq.top().first;
-            int node = pq.top().second;
+
+            pair<int, int> it = pq.top();
             pq.pop();
 
-            visited[node] = true; // only makrk tur once you pop it out of pq
-            sum += weight;
-            for (pair<int, int> neighbour : adj[node])
-            {
-                int adjNode = neighbour.first;
-                int edgeWeight = neighbour.second;
-                if (visited[neighbour.first] != true)
-                {
-                    pq.push({edgeWeight, adjNode});
-                }
+            int node = it.second;
+            int wt = it.first;
+
+            if (vis[node] == 1){
+                continue;
             }
-           
+                // add to MST
+                vis[node] = 1;
+                sum += wt;
+
+                for (auto it : adj[node])
+                {
+
+                    int adjNode = it[0];
+                    int edW = it[1];
+
+                    if (!vis[adjNode])
+                    {
+                        pq.push({edW, adjNode});
+                    }
+                }
+            
         }
- return sum;
+
+        return sum;
     }
-    
 };

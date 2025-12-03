@@ -222,8 +222,7 @@ int SumNodeTree(Node *root)
     }
     int LeftSum = SumNodeTree((*root).left);
     int RightSum = SumNodeTree((*root).right);
-    ((*root).data) = ((*root).data) + leftSum + RightSum;
-    return (*root).data;
+ return root->data + LeftSum + RightSum;
 }
 
 

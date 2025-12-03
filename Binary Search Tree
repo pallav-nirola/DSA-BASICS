@@ -51,13 +51,23 @@ bool search(Node *root, int key)
         return search((*root).left, key);
     }
 }
-Node* getInorderSuccessor(Node* root) {
-    //  successor is the leftmost node in the right subtree
-    while (root!=NULL && root->left != nullptr) {
-        root = root->left;
+Node* inorderSuccessor(Node* root, Node* target) {
+    Node* successor = NULL;
+
+    while (root != NULL) {
+
+        if (target->data < root->data) {
+            successor = root;
+            root = root->left;
+        }
+        else {
+            root = root->right;
+        }
     }
-    return current;
+
+    return successor;
 }
+
 Node* delNode(Node* root, int key) {
     // 1. Base Case: If the tree is empty
     if (root == nullptr) {

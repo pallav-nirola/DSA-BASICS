@@ -35,15 +35,15 @@ void merge(int arambh, int ant, int madhya, vector<int> &vi)
     }
     
 }
-void mergeSort(int start, int end, vector<int> &vi)
+void division (int start, int end, vector<int> &vi)
 {
     if (start >= end)
     {
         return;
     }
     int mid = start + (end - start) / 2;
-    mergeSort(start, mid, vi);
-    mergeSort(mid + 1, end, vi);
+    division(start, mid, vi);
+    division(mid + 1, end, vi);
     merge(start, end, mid, vi);
 }
 int main()

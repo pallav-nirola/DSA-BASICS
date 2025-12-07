@@ -81,3 +81,64 @@ int main()
 
     return 0;
 }
+lexicographic order
+class answer
+{
+public:
+    vector<int> dijkstras(int vertex, char source, vector<pair<int,int>> adj[], unordered_map<char,int> &yourmap)
+    {
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        vector<int> distance(vertex, 1e9);
+        distance[yourmap[source]] = 0;
+        pq.push({0, yourmap[source]});
+
+        while(!pq.empty())
+        {
+            int node = pq.top().second;
+            int weight = pq.top().first;
+            pq.pop();
+
+            for(pair<int,int> neighbour : adj[node])
+            {
+                int adjNode = neighbour.first;
+                int edgewt = neighbour.second;
+
+                if(weight + edgewt < distance[adjNode])
+                {
+                    distance[adjNode] = weight + edgewt;
+                    pq.push({distance[adjNode], adjNode});
+                }
+            }
+        }
+
+        return distance; // <-- must have
+    }
+};
+
+int main()
+{
+    unordered_map<char,int> yourmap;
+    yourmap['A'] = 0;
+    yourmap['B'] = 1;
+    yourmap['C'] = 2;
+    yourmap['D'] = 3;
+    yourmap['E'] = 4;
+
+    int V = 5;
+    vector<pair<int,int>> adj[V];
+
+    // Example edges: A-B 2, A-C 4, etc.
+    adj[yourmap['A']].push_back({yourmap['B'], 2});
+    adj[yourmap['A']].push_back({yourmap['C'], 4});
+    adj[yourmap['B']].push_back({yourmap['C'], 1});
+    adj[yourmap['B']].push_back({yourmap['D'], 7});
+    adj[yourmap['C']].push_back({yourmap['E'], 3});
+
+    answer obj;
+    vector<int> dist = obj.dijkstras(V, 'A', adj, yourmap);
+
+    for(int i=0;i<V;i++)
+        cout << i << " -> " << dist[i] << endl;
+
+    return 0;
+}

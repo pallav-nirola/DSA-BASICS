@@ -20,3 +20,34 @@ bool ISCircular(int source, int vertex, vector<int> adj[], vector<bool> &vis, in
         }
         return false;
     }
+
+Using bfs
+bool iscircular(int vertex, int source, vector<int> adj[], int par)
+    {
+        queue<pair<int, int>> q;
+        vector<bool> vist(vertex, false);
+        q.push({source, -1});
+        vist[source] = true;
+        while (q.empty() == 0)
+        {
+            int node = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+            for (int neighbour : adj[node])
+            {
+                if (vist[neighbour] != true)
+                {
+                    q.push({neighbour, node});
+                    vist[neighbour] = true;
+                }
+                else if (vist[neighbour] == true && neighbour == parent)
+                {
+                }
+                else if (vist[neighbour] == true && neighbour != parent)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }

@@ -1,0 +1,22 @@
+using dfs
+bool ISCircular(int source, int vertex, vector<int> adj[], vector<bool> &vis, int parent)
+    {
+        vis[source] = true;
+        for (int neighbour : adj[source])
+        {
+            if (vis[neighbour] != true)
+            {
+               if( ISCircular(neighbour, vertex, adj, vis, source)==true) // when we find the cycle and the line 17 will rturn true , and for line 9 if true then it owuld auto return true to the func{
+               return true;
+               }
+            }
+            else if (vis[neighbour] == true && neighbour == parent)
+            {
+            }
+            else if (vis[neighbour] == true && neighbour != parent)
+            {
+                return true;
+            }
+        }
+        return false;
+    }

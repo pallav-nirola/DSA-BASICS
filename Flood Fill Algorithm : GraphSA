@@ -1,0 +1,35 @@
+void dfsFloodFill(int x, int y, int n, int m, vector<vector<int>> &image, vector<vector<bool>> &vis, int source, int colour, vector<vector<int>> &grid)
+    {
+        if (x < 0 || y < 0 || x >= n || y >= m || grid[x][y] != source || vis[x][y] == true)
+        {
+            return;
+        }
+        else
+        {
+            vis[x][y] = true;
+            image[x][y] = colour;
+            dfsFloodFill(x, y + 1, n, m, image, vis, source, colour, grid);
+            dfsFloodFill(x, y - 1, n, m, image, vis, source, colour, grid);
+            dfsFloodFill(x + 1, y, n, m, image, vis, source, colour, grid);
+            dfsFloodFill(x - 1, y, n, m, image, vis, source, colour, grid);
+        }
+    }
+    vector<vector<int>> floodfill(int n, int m, vector<vector<int>> &grid, int x_0, int y_0, int colour)
+    {
+        n = grid.size();
+        m = grid[0].size();
+
+        vector<vector<int>> image = grid;
+        vector<vector<bool>> vis(n, vector<bool>(m, false));
+        int source = grid[x_0][y_0];
+        if (source == colour)
+        {
+            return grid;
+        }
+
+        if (grid[x_0][y_0] == source && vis[x_0][y_0] != true)
+        {
+            dfsFloodFill(x_0, y_0, n, m, image, vis, source, colour, grid);
+        }
+        return image;
+    }

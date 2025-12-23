@@ -2,6 +2,66 @@
 #include <vector>
 #include <queue>
 using namespace std;
+Shraddha Solution 
+int rotten_Oranges(int veretx, int source, vector<vector<int>> &grid)
+    {
+        queue<pair<pair<int, int>, int>> qu; // node with with time
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<bool>> vis(n, vector<bool>(m, false));    int ans = 0;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (grid[i][j] == 2 && vis[i][j] != true)
+                {
+                    qu.push({{i, j}, 0});
+                    vis[i][j] = true;
+                }
+            }
+        }
+        while (qu.empty() == 0)
+        {
+            int x = qu.front().first.first;
+            int y = qu.front().first.second;
+            int time = qu.front().second;
+         
+            qu.pop();
+            if (x >= 0 && y + 1 >= 0 && x < n && y + 1 < m && grid[x][y + 1] == 1)
+            {
+                qu.push({{x, y + 1}, time + 1});
+                vis[x][y + 1] = true;
+            }
+            if (x + 1 >= 0 && y >= 0 && x + 1 < n && y < m && grid[x + 1][y] == 1)
+            {
+                qu.push({{x + 1, y}, time + 1});
+                vis[x + 1][y] = true;
+            }
+            if (x >= 0 && y - 1 >= 0 && x < n && y - 1 < m && grid[x][y - 1] == 1)
+            {
+                qu.push({{x, y - 1}, time + 1});
+                vis[x][y - 1] = true;
+            }
+            if (x - 1 >= 0 && y >= 0 && x - 1 < n && y < m && grid[x - 1][y] == 1)
+            {
+                qu.push({{x - 1, y}, time + 1});
+                vis[x - 1][y] = true;
+            }
+             ans = time;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (grid[i][j] == 1 && vis[i][j] != true)
+                {
+                    return -1;
+                }
+            }
+        }
+        return ans;
+    }
+Striver Solution
 int orangesRotting(vector<vector<int>> &grid)
 {
     int row = grid.size();    // number of rows

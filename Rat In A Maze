@@ -1,0 +1,35 @@
+class solution
+{
+    static int count;
+    void dfs(vector<vector<char>> &maze, vector<vector<bool>> &vis, int x, int y, int n, int m)
+    {
+        if (x < 0 || y < 0 || x >= n || y >= m || maze[x][y] == '0' || vis[x][y] == true)
+        {
+            return;
+        }
+        vis[x][y] = true;
+        dfs(maze, vis, x + 1, y, n, m);
+        dfs(maze, vis, x - 1, y, n, m);
+        dfs(maze, vis, x, y + 1, n, m);
+        dfs(maze, vis, x, y - 1, n, m);
+    }
+
+    int ratInAMaze(vector<vector<char>> &maze)
+    {
+        int n = maze.size();
+        int m = maze[0].size();
+        count = 0;
+        vector<vector<bool>> vis(n, vector<bool>(m, false));
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (maze[i][j] == '1' && vis[i][j] != true)
+                {
+                    count++;
+                    dfs(maze, vis, i, j, n, m);
+                }
+            }
+        }
+    }
+};

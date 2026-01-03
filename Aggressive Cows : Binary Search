@@ -1,0 +1,42 @@
+lass Solution
+{
+    int ans = -1;
+    bool IsPossible(vector<int> &stalls, int cows, int n, int mid)
+    {
+        int cowPlacedSoFar = 1;
+        int lastPlacedCowPosition = stalls[0];
+        for (int i = 1; i < stalls.size(); i++) // starting from 1 because first cow is already placed so no need to check for the first index
+        {
+            if (stalls[i] >= mid + lastPlacedCowPosition)
+            {
+                lastPlacedCowPosition = stalls[i];
+                cowPlacedSoFar++;
+            }
+            if (cowPlacedSoFar == cows)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    int AggressiveCows(vector<int> availableStalls, int cows, int n)
+    {
+        sort(availableStalls.begin(), availableStalls.end());
+        int start = 1;
+        int end = availableStalls[n - 1] - availableStalls[0];
+        while (start <= end)
+        {
+            int mid = start + (end - start) / 2;
+            if (IsPossible(availableStalls, cows, availableStalls.size(), mid) == true)
+            {
+                ans = mid;
+                start = mid + 1;
+            }
+            else
+            {
+                end = mid - 1;
+            }
+        }
+        return ans;
+    }
+};

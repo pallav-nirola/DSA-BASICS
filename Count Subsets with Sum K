@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int countSubsets(int idx, int currsum, int target, vector<int>& nums) {
+        if (idx == nums.size()) {
+            return (currsum == target) ? 1 : 0;
+        }
+
+        int include = countSubsets(idx + 1, currsum + nums[idx], target, nums);
+        int exclude = countSubsets(idx + 1, currsum, target, nums);
+
+        return include + exclude;
+    }
+
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return countSubsets(0, 0, target, nums);
+    }
+};

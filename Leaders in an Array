@@ -1,0 +1,27 @@
+class Solution
+{
+public:
+    vector<int> leaders(vector<int> &nums)
+    {
+        vector<int> ans;
+        if (nums.size() == 0)
+        {
+            return ans;
+        }
+        int maxSoPower = nums[nums.size() - 1];
+        ans.push_back(maxSoPower);
+        for (int i = nums.size() - 2; i >= 0; i++)
+        {
+            if (nums[i] > maxSoPower)
+            {
+                ans.push_back(nums[i]);
+                maxSoPower = nums[i];
+            }
+            else
+            {
+            }
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};

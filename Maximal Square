@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function: returns max square side starting from (i,j)
+int expandSquare(vector<vector<char>>& matrix, int i, int j) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    
+    // Base case: out of bounds or 0 → cannot expand
+    if(i >= rows || j >= cols || matrix[i][j] == '0') return 0;
+    
+    // Recursively check right, down, diagonal
+    int right = expandSquare(matrix, i, j + 1);
+    int down = expandSquare(matrix, i + 1, j);
+    int diag = expandSquare(matrix, i + 1, j + 1);
+    
+    // Max square side starting here = 1 + min of neighbors
+    return 1 + min({right, down, diag});
+}
+int maximalSquare(vector<vector<char>>& matrix) {
+    int maxSide = 0;
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            if(matrix[i][j] == '1') {
+                int side = expandSquare(matrix, i, j); // your thought process
+                maxSide = max(maxSide, side);
+            }
+        }
+    }
+    
+    return maxSide * maxSide; // return area
+}

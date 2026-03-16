@@ -11,7 +11,7 @@ int LCS(string &str1 , string &str2 ,  int idx_1 , int idx_2){
         int move_idx_2 = 0 + LCS(str1 , str2 , idx_1 , idx_2 - 1);
     return max(move_idx_1 , move_idx_2);
     }
-}
+} 
 int LCS(string &str1 , string &str2 ,  int idx_1 , int idx_2 , vector<vector<int>> &dp){
     if(idx_1<0 || idx_2<0){
         return 0;

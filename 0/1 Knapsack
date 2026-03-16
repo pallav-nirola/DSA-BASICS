@@ -1,0 +1,12 @@
+int value(int idx, int wt_so_far, vector<int> &weights, vector<int> &prices, int capacity_of_bag)
+{
+    if(idx == prices.size()){
+return 0;
+    }
+    if(wt_so_far>capacity_of_bag){
+        return INT_MIN;
+    }
+    int take = prices[idx] + value(idx + 1, wt_so_far + weights[idx], weights, prices, capacity_of_bag);
+    int not_take = 0 + value(idx + 1, wt_so_far, weights, prices, capacity_of_bag);
+    return max(take,not_take);
+}

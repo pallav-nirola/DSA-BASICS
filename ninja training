@@ -1,0 +1,23 @@
+int ninja_train(int curr_day, int last_task, vector<vector<int>> &points)
+{
+    if (curr_day == 0)
+    {
+        int maxi = 0;
+        for(int i = 0 ; i<=2 ; i++){
+            if(i != last_task){
+                maxi = max(maxi, points[curr_day][i]);
+            }
+        }
+        return maxi;
+    }
+    int maxi = 0;
+    for (int i = 0; i <= 2; i++)
+    {
+        if (i != last_task)
+        {
+            int acitivity_point = points[curr_day][i] + ninja_train(curr_day - 1, i, points);
+            maxi = max(maxi, acitivity_point);
+        }
+    }
+    return maxi;
+}

@@ -45,7 +45,7 @@ public:
     }
     int dfsTravel(int src, vector<bool> &visited)
     {
-        visited[0] = true;
+        visited[src] = true;
         cout << src << " ";
         for (int neighbour : l[src])
         {

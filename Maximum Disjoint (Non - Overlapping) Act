@@ -1,0 +1,24 @@
+bool comp(pair<int, int> &a, pair<int, int> &b)
+{
+    return a.second<b.second;
+
+}
+int max_disjoint_intervals(vector<int> &start , vector<int> &end){
+    vector<pair<int,int>> time ;
+    for(int i =0; i<start.size() ; i++){
+        time.push_back({start[i],end[i]});
+    }
+    sort(time.begin() , time.end() , comp);
+    int count = 0;
+    int last_end = -1;
+    for(int i = 0; i<time.size() ; i++){
+        if(time[i].first>=last_end){
+            count ++;
+            last_end = time[i].second;
+        }
+        else{
+            continue;
+        }
+    }
+    return count;
+}

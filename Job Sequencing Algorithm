@@ -1,0 +1,53 @@
+bool comparator(vector<int> &a, vector<int> &b)
+{
+    return a[2] > b[2];
+}
+int max_profit(vector<vector<int>> &arr)
+{
+
+    sort(arr.begin(), arr.end(), comparator);
+    int n = 0;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        n = max(n, arr[i][1]);
+    }
+    vector<int> ans(n + 1, -1);
+    int count = 0;
+    int max_profit_so_far = 0;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (ans[arr[i][1]] == -1)
+        {
+            ans[arr[i][1]] = arr[i][0];
+            count = count + 1;
+            max_profit_so_far = max_profit_so_far + arr[i][2];
+        }
+       else
+        {
+            for (int j = arr[i][1]; j >= 0; j--)
+            {
+                if (ans[j] == -1)
+                {
+                    ans[j] = arr[i][0];
+                    count = count + 1;
+                    max_profit_so_far = max_profit_so_far + arr[i][2];
+                    break;
+                }
+            }
+        }
+    }
+    return max_profit_so_far;
+}
+ int main()   
+{
+   vector<vector<int>> jobs = {
+            {6, 2, 80},
+            {3, 6, 70},
+            {4, 6, 65},
+            {2, 5, 60},
+            {5, 4, 25},
+            {8, 2, 22},
+            {1, 4, 20},
+            {7, 2, 10}};
+        return 0;
+    }

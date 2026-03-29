@@ -1,0 +1,30 @@
+double fractional_knapsack(vector<int> &weights, vector<int> &values, int capacity)
+{
+    int n = weights.size();
+    vector<pair<pair<int, int>, double>> ratios;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        double ration = (double)values[i] / weights[i];
+        ratios.push_back({{weights[i], values[i]}, ration});
+    }
+    sort(ratios.begin(), ratios.end(), comp);
+    double max_profit = 0.0;
+    int i = 0;
+    while (capacity > 0 && i < n)
+    {
+        if (ratios[i].first.first <= capacity)
+        {
+            max_profit = max_profit + ratios[i].first.second;
+            capacity = capacity - ratios[i].first.first;
+            i++;
+        }
+        else
+        {
+            int need_wt = capacity;
+            double need_val = ratios[i].second * need_wt;
+            max_profit = max_profit + need_val;
+            capacity = 0;
+        }
+    }
+    return max_profit;
+}

@@ -1,0 +1,32 @@
+bool isSafe(int node, int col, vector<vector<int>> &graph, int vertex, vector<int> &colour) {
+    for (int neighbour : graph[node]) {
+        if (colour[neighbour] == col) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool m_color_prob(int node , int color , vector<vector<int>> & graph , int vertex , int m , vector<int> &colour){
+    
+    if(node == vertex){
+        return true;
+    }
+    else{
+        for(int i = 1 ; i <= m ; i++){   // use 1 to m
+
+            if(isSafe(node, i, graph, vertex, colour) == true){
+                
+                colour[node] = i;
+
+                if(m_color_prob(node + 1 , color , graph , vertex , m , colour) == true){
+                    return true;
+                }
+
+                // backtrack
+                colour[node] = 0;
+            }
+        }
+    }
+    return false;
+}

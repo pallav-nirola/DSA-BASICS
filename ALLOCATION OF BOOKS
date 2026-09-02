@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+;
 // Helper function to check if it is possible to allocate books
 // such that no student gets more than 'maxPages' pages
 bool isFeasible(int arr[], int n, int k, int maxPages) {
